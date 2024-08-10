@@ -4,7 +4,7 @@ from github import Github
 import git
 
 def write_to_version_file(version) -> None:
-    with open("version.txt"), "w") as f:
+    with open("version.txt", "w") as f:
         f.write(f"{version}\n")
 
 def generate_release_notes(token):
