@@ -16,8 +16,8 @@ def generate_release_notes(token):
     }
 
     data = {
-        "tag_name": "0.0.4",
-        "previous_tag_name": "0.0.3",
+        "tag_name": "0.0.5",
+        "previous_tag_name": "0.0.4",
         "target_commitish": "main",
     }
 
@@ -28,27 +28,28 @@ def generate_release_notes(token):
 
 
 def create_release(token):
-    write_to_version_file("0.0.4")
+    write_to_version_file("0.0.5")
 
     local_repo = git.Repo(".")
-    local_repo.git.commit("-am", f"Bump to Release version: 0.0.4")
-    local_repo.git.tag("0.0.4")
+    local_repo.git.commit("-am", f"Bump to Release version: 0.0.5")
+    local_repo.git.tag("0.0.5")
 
-    write_to_version_file("0.0.5-SNAPSHOT")
+    write_to_version_file("0.0.6-SNAPSHOT")
 
-    local_repo.git.commit("-am", f"Bump to Pre-release version: 0.0.5-SNAPSHOT")
+    local_repo.git.commit("-am", f"Bump to Pre-release version: 0.0.6-SNAPSHOT")
 
     message = generate_release_notes(token)
+    message = f"## Header\n\n${message}"
 
     local_repo.git.push()
-    local_repo.git.push("origin", "0.0.4")
+    local_repo.git.push("origin", "0.0.5")
 
     gh = Github(token)
     repo = gh.get_repo("syed-jamal/example")
 
     repo.create_git_release(
-        tag="0.0.4",
-        name="0.0.4",
+        tag="0.0.5",
+        name="0.0.5",
         message=message,
         target_commitish="main",
     )
