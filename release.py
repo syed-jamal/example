@@ -1,7 +1,11 @@
 import os
 import requests
 from github import Github
+import git
 
+def write_to_version_file(version) -> None:
+    with open("version.txt"), "w") as f:
+        f.write(f"{version}\n")
 
 def generate_release_notes(token):
     url = f"https://api.github.com/repos/syed-jamal/example/releases/generate-notes"
@@ -12,8 +16,8 @@ def generate_release_notes(token):
     }
 
     data = {
-        "tag_name": "0.0.3",
-        "previous_tag_name": "0.0.2",
+        "tag_name": "0.0.4",
+        "previous_tag_name": "0.0.3",
         "target_commitish": "main",
     }
 
@@ -24,14 +28,27 @@ def generate_release_notes(token):
 
 
 def create_release(token):
+    write_to_version_file("0.0.4")
+
+    local_repo = git.Repo(".")
+    local_repo.git.commit("-am", f"Bump to Release version: 0.0.4")
+    local_repo.git.tag("0.0.4")
+
+    write_to_version_file("0.0.5-SNAPSHOT")
+
+    local_repo.git.commit("-am", f"Bump to Pre-release version: 0.0.5-SNAPSHOT")
+
     message = generate_release_notes(token)
+
+    local_repo.git.push()
+    local_repo.git.push("origin", "0.0.4")
 
     gh = Github(token)
     repo = gh.get_repo("syed-jamal/example")
 
     repo.create_git_release(
-        tag="0.0.3",
-        name="0.0.3",
+        tag="0.0.4",
+        name="0.0.4",
         message=message,
         target_commitish="main",
     )
