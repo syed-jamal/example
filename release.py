@@ -12,8 +12,8 @@ def generate_release_notes(token):
     }
 
     data = {
-        "tag_name": 0.0.3,
-        "previous_tag_name": 0.0.2,
+        "tag_name": "0.0.3",
+        "previous_tag_name": "0.0.2",
         "target_commitish": "main",
     }
 
@@ -30,8 +30,8 @@ def create_release(token):
     repo = gh.get_repo("syed-jamal/example")
 
     repo.create_git_release(
-        tag=0.0.3,
-        name=0.0.3,
+        tag="0.0.3",
+        name="0.0.3",
         message=message,
         target_commitish="main",
     )
@@ -40,4 +40,3 @@ def create_release(token):
 if __name__ == "__main__":
     token = os.environ.get("EXAMPLE_PAT")
     create_release(token)
-    
