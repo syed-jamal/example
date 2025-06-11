@@ -11,4 +11,5 @@ jobs:
           token: ${{ secrets.PAT }}
           image-names: "test"
           image-tags: "0.2"
+          cut-off: 1s
           dry-run: true
