@@ -10,7 +10,7 @@ jobs:
           account: user
           token: ${{ secrets.PAT }}
           image-names: "test"
-          image-tags: "0.2"
+          image-tags: "0.2,latest"
           cut-off: 1s
           dry-run: false
           rust-log: container_retention_policy=debug
