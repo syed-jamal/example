@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: snok/container-retention-policy@v3.0.0
         with:
-          account: syed-jamal
+          account: user
           token: ${{ secrets.PAT }}
           image-names: "test"
           image-tags: "0.2"
