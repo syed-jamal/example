@@ -12,5 +12,5 @@ jobs:
           image-names: "test"
           image-tags: "0.2"
           cut-off: 1s
-          dry-run: true
+          dry-run: false
           rust-log: container_retention_policy=debug
