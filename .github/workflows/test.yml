@@ -3,14 +3,8 @@ on:
 jobs:
   clean:
     runs-on: ubuntu-latest
-    name: Delete old test images
     steps:
-      - uses: snok/container-retention-policy@v3.0.0
+      - uses: dataaxiom/ghcr-cleanup-action@v1
         with:
-          account: user
-          token: ${{ secrets.PAT }}
-          image-names: "test"
-          image-tags: "0.2,latest"
-          cut-off: 1s
-          dry-run: false
-          rust-log: container_retention_policy=debug
+          token: {{ secrets.PAT }}
+          dry-run: true
