@@ -1,6 +1,7 @@
 on:
   workflow_dispatch:
 jobs:
+  ghcr-cleanup:
     name: ghcr.io cleanup action
     runs-on: ubuntu-latest
     steps:
