@@ -10,4 +10,3 @@ jobs:
           token: ${{ secrets.PAT }}
           package: test
           delete-tags: 0.1
-          dry-run: true
