@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
 jobs:
-  clean:
+  - name: ghcr.io cleanup action
     runs-on: ubuntu-latest
     steps:
       - uses: dataaxiom/ghcr-cleanup-action@v1
